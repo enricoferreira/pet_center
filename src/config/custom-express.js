@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const hbs = require('express-handlebars');
+const handlebars = require('express-handlebars');
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -15,9 +15,10 @@ app.use(cors());
 app.use('/static', express.static('../app/public'));
 
 app.set('views', path.join(__dirname, '../app/views'));
-app.set('view engine', 'handlebars');
-app.engine('handlebars', hbs({
+app.engine('handlebars', handlebars({
     defaultLayout: 'main',
+    allowProtoMethodsByDefault: true,    
+    allowedProtoMethods: true,  
     helpers: {
         section: function(name, options) { 
           if (!this._sections) this._sections = {};
@@ -57,6 +58,7 @@ app.engine('handlebars', hbs({
         }
       }
 }))
+app.set('view engine', 'handlebars');
 
 const routes = require('../app/routes/routes');
 routes(app);

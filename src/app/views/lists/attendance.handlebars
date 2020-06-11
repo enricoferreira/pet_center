@@ -1,0 +1,22 @@
+<thead>
+    <th>Type</th>
+    <th>Extra Detail</th>
+    <th>Data de Registro</th>
+    <th>Price</th>
+    <th>Employee</th>
+</thead>
+<tbody>
+    {{#each results}}
+        <tr>
+            <td>{{type}}</td>
+            <td>{{extra_detail}}</td>
+            <td>{{register_date}}</td>
+            <td>R${{price}}</td>
+            <td>
+                {{#employee}}
+                    {{name}}
+                {{/employee}}
+            </td>
+        </tr>
+    {{/each}}
+</tbody>

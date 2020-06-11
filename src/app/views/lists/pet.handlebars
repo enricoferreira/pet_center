@@ -1,0 +1,17 @@
+<thead>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Breed</th>
+    <th>User</th>
+</thead>
+<tbody>
+    {{#each results}}
+        <td>{{name}}</td>
+        <td>{{type}}</td>
+        <td>{{breed}}</td>
+        <td>{{#each user}}
+                {{name}}
+            {{/each}}
+        </td>
+    {{/each}}
+</tbody>

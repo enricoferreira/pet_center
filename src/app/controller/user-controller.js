@@ -4,6 +4,7 @@ const User = mongoose.model('user');
 require('../model/pet');
 const Pet = mongoose.model('pet');
 mongoose.set('useCreateIndex', true);
+const moment = require('moment');
 
 class UserController{
     route(){
@@ -17,7 +18,14 @@ class UserController{
         return ((req, res)=>{
             try{
                 User.find().populate(['pets']).lean().then(result=>{
-                    res.send(result);
+                    result.forEach(register => {
+                        register.birthday = moment(register.birthday).format('DD/MM/YYYY');
+                    })
+                    res.render('lists/user', {
+                        layout: 'list',
+                        result,
+                        title: 'Lista de Usuários'
+                    })
                 })
             }catch(err){
                 res.send(err);

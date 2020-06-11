@@ -3,6 +3,7 @@ require('../model/attendance');
 const Attendance = mongoose.model('attendance');
 require('../model/employee');
 const Employee = mongoose.model('employee');
+const moment = require('moment');
 class AttendanceController{
 
     route(){
@@ -15,8 +16,16 @@ class AttendanceController{
     show(){
         return ((req, res)=>{
             try{
-                Attendance.find().lean().populate(['employee']).then(result =>{
-                    res.json(result);
+                Attendance.find().lean().populate(['employee']).then(results =>{
+                    results.forEach(register =>{
+                        register.register_date = moment(register.register_date).format('DD/MM/YYYY');
+                        register.price = new Intl.NumberFormat('pt-BR').format(register.price);
+                    })
+                    res.render('lists/attendance', {
+                        layout: 'list',
+                        results,
+                        title: 'Lista de Atendimentos'
+                    })
                 }).catch(err =>{
                     res.json(err);
                 })

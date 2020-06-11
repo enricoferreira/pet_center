@@ -16,9 +16,12 @@ class PetController {
     show(){
         return ((req, res)=>{
             try{
-                Pet.find().lean().populate(['user']).then(result=>{
-                    console.log(result);                    
-                    res.json(result);
+                Pet.find().lean().populate(['user']).then(results=>{                    
+                    res.render('lists/pet', {
+                        layout: 'list',
+                        results,
+                        title: 'Lista de Pets'
+                    })                    
                 })
             }catch(err){
                 res.send(err);

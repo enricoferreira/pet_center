@@ -1,0 +1,21 @@
+<thead>
+    <th>Name</th>
+    <th>Birthday</th>
+    <th>Gender</th>
+    <th>Type</th>
+    <th>Attendances</th>
+</thead>
+<tbody>
+    {{#each results}}
+    <tr>
+        <td>{{name}}</td>
+        <td>{{birthday}}</td>
+        <td>{{gender}}</td>
+        <td>{{type}}</td>
+        <td>{{#each attendance}}
+                {{type}}
+            {{/each}}
+        </td>
+    </tr>
+    {{/each}}
+</tbody>
